@@ -6,7 +6,7 @@
 /*   By: kadjane <kadjane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 18:18:52 by kadjane           #+#    #+#             */
-/*   Updated: 2023/03/11 18:22:53 by kadjane          ###   ########.fr       */
+/*   Updated: 2023/03/17 17:48:14 by kadjane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	ft_isum(int c)
 		return (0);
 }
 
-void	remove_space(char **line)
+void	remove_space_in_the_end(char **line)
 {
 	int		i;
 	int		j;

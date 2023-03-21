@@ -6,7 +6,7 @@
 /*   By: kadjane <kadjane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 19:29:34 by kadjane           #+#    #+#             */
-/*   Updated: 2023/03/09 19:45:24 by kadjane          ###   ########.fr       */
+/*   Updated: 2023/03/18 12:59:21 by kadjane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	full_tab(char const *s, char **tab_str)
 	tab_str[i] = NULL;
 }
 
-char	**ft_split_textures(char const *s)
+char	**ft_split_textures(char *s)
 {
 	char	**tab_str;
 

@@ -6,7 +6,7 @@
 /*   By: kadjane <kadjane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:43:41 by kadjane           #+#    #+#             */
-/*   Updated: 2023/02/23 18:58:15 by kadjane          ###   ########.fr       */
+/*   Updated: 2023/03/18 09:37:48 by kadjane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*get_next_line(int fd)
 	static char	*save[OPEN_MAX];
 	int			n;
 
-	if (fd < 0|| read (fd, NULL, 0) < 0)
+	if (fd < 0 || read (fd, NULL, 0) < 0)
 		return (NULL);
 	if (!save[fd])
 		save[fd] = ft_strdup ("");

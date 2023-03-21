@@ -6,13 +6,13 @@
 /*   By: hasabir <hasabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 14:41:39 by hasabir           #+#    #+#             */
-/*   Updated: 2023/03/14 08:40:06 by hasabir          ###   ########.fr       */
+/*   Updated: 2023/03/18 12:27:03 by hasabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int get_size_x(char **map)
+int	get_size_x(char **map)
 {
 	int	stock;
 	int	i;
@@ -33,7 +33,7 @@ int get_size_x(char **map)
 
 int	get_size_y(char **map)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (map[++i])
@@ -41,26 +41,30 @@ int	get_size_y(char **map)
 	return (i);
 }
 
-void get_player_position(t_data *data)
+void	get_player_position(t_data *data)
 {
-	int pos;
-	
-	pos = 0;
-	data->player.player_y = -1;
-	while (data->map[++(data->player.player_y)])
+	int	x;
+	int	y;
+
+	data->player.direction = 0;
+	y = -1;
+	while (data->map[++y])
 	{
-		data->player.player_x = -1;
-		while (data->map[data->player.player_y][++data->player.player_x])
+		x = -1;
+		while (data->map[y][++x])
 		{
-			if (data->map[data->player.player_y][data->player.player_x] == 'N')
+			if (data->map[y][x] == 'N' ||
+				data->map[y][x] == 'S' ||
+				data->map[y][x] == 'W' ||
+				data->map[y][x] == 'E')
 			{
-				pos = 1;
-				break;
+				data->player.direction = data->map[y][x];
+				break ;
 			}
 		}
-		if (pos)
-			break;
+		if (data->player.direction)
+			break ;
 	}
-	data->player.player_x = 30 * data->player.player_x + 10;
-	data->player.player_y = 30 * data->player.player_y + 10;
+	data->player.player_y = 30 * y + 10;
+	data->player.player_x = 30 * x + 10;
 }
