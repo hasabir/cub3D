@@ -6,7 +6,7 @@
 /*   By: hasabir <hasabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:20:33 by hasabir           #+#    #+#             */
-/*   Updated: 2023/03/21 17:29:26 by hasabir          ###   ########.fr       */
+/*   Updated: 2023/03/26 15:24:56 by hasabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	init_player_data(t_data *data)
 	get_player_position(data);
 	data->coordinate.x1 = data->player.player_x + 5;
 	data->coordinate.y1 = data->player.player_y + 5;
-	data->player.speed = 10;
+	data->player.speed = 2;
 	if (data->player.direction == 'N')
 		data->player.angle = M_PI / 2;
 	if (data->player.direction == 'S')
@@ -37,7 +37,7 @@ void	set_mlx_data(t_data *data)
 	data->player.player_x = 0;
 	data->player.player_y = 0;
 	data->mlx_data->size_x = get_size_x(data->map);
-	data->mlx_data->size_y = get_size_y(data->map);
+	data->mlx_data->size_y = get_size_y(data->map) - 1;
 	data->mlx_data->mlx_win = mlx_new_window(data->mlx_data->mlx,
 			data->mlx_data->size_x * 30,
 			data->mlx_data->size_y * 30, "Cub3D");

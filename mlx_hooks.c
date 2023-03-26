@@ -6,7 +6,7 @@
 /*   By: hasabir <hasabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 18:56:51 by hasabir           #+#    #+#             */
-/*   Updated: 2023/03/21 14:56:44 by hasabir          ###   ########.fr       */
+/*   Updated: 2023/03/25 22:11:05 by hasabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,86 +29,48 @@ int	key_hook_destroy(int key, t_mlx *mlx_data)
 	return (0);
 }
 
-int	key_hook(int key, t_data *data)
+int key_hook(int key, t_data *data)
 {
-	if (key == 0 || key == 2 || key == 1 || key == 13
-		|| key == 123 || key == 124)
+	data->mlx_data->key_state[key] = 1;
+	key_hook_destroy(key, data->mlx_data);
+	return (0);
+}
+
+int key_release(int key, t_data *data)
+{
+	data->mlx_data->key_state[key] = 0;
+	return (0);
+}
+
+int	move_hook(t_data *data)
+{
+	if (data->mlx_data->key_state[0] || data->mlx_data->key_state[2]
+		|| data->mlx_data->key_state[1] || data->mlx_data->key_state[13]
+		|| data->mlx_data->key_state[123] || data->mlx_data->key_state[124])
 	{
-		if (key == 0)
+		if (data->mlx_data->key_state[0])
 			move_player(data, WEST);
-		if (key == 2)
+		if (data->mlx_data->key_state[2])
 			move_player(data, EAST);
-		if (key == 1)
+		if (data->mlx_data->key_state[1])
 			move_player(data, SOUTH);
-		if (key == 13)
+		if (data->mlx_data->key_state[13])
 			move_player(data, NORTH);
-		if (key == 123)
+		if (data->mlx_data->key_state[123])
 			rotate_player(data, WEST);
-		if (key == 124)
+		if (data->mlx_data->key_state[124])
 			rotate_player(data, EAST);
 		mlx_clear_window(data->mlx_data->mlx, data->mlx_data->mlx_win);
 		draw_map(data);
 	}
-	key_hook_destroy(key, data->mlx_data);
 	return (0);
 }
 
 int	loop_hook(t_data *data)
 {
 	mlx_hook(data->mlx_data->mlx_win, 2, 0, key_hook, data);
+	mlx_hook(data->mlx_data->mlx_win, 3, 0, key_release, data);
 	mlx_hook(data->mlx_data->mlx_win, 17, 0, destroy_window_x, data);
+	move_hook(data);
 	return (0);
 }
-
-// int key_hook(int key, t_data *data)
-// {
-// 	if (key == 0 || key == 2 || key == 1 || key == 13)
-// 	{
-// 		data->player.direction = 'T';
-// 		if (key == 0)
-// 			data->player.type = WEST;
-// 		if (key == 2)
-// 			data->player.type = EAST;
-// 			// move_player(data, EAST);
-// 		if (key == 1)
-// 			data->player.type = SOUTH;
-// 			// move_player(data, SOUTH);
-// 		if (key == 13)
-// 			data->player.type = NORTH;
-// 			// move_player(data, NORTH);
-// 		// mlx_clear_window(data->mlx_data->mlx, data->mlx_data->mlx_win);
-// 		// draw_map(data);
-// 	}
-// 	if (key == 123 || key == 124)
-// 	{
-// 		data->player.direction = 'R';
-// 		if (key == 123)
-// 			data->player.type = WEST;
-// 			// rotate_player(data, WEST);
-// 		if (key == 124)
-// 			data->player.type = EAST;
-// 		mlx_clear_window(data->mlx_data->mlx, data->mlx_data->mlx_win);
-// 			// rotate_player(data, EAST);
-// 		// mlx_clear_window(data->mlx_data->mlx, data->mlx_data->mlx_win);
-// 	}
-// 	key_hook_destroy(key, data->mlx_data);
-// 	return (0);
-// }
-
-// int	loop_hook(t_data *data)
-// {
-// 	mlx_hook(data->mlx_data->mlx_win, 2, 0, key_hook, data);
-// 	if (data->player.direction == 'T')
-// 	{
-// 		move_player(data, data->player.type);
-// 		draw_map(data);
-// 	}
-// 	if (data->player.direction == 'R')
-// 	{
-// 		rotate_player(data, data->player.type);
-// 		mlx_clear_window(data->mlx_data->mlx, data->mlx_data->mlx_win);
-// 		draw_map(data);
-// 	}
-// 	mlx_hook(data->mlx_data->mlx_win, 17, 0, destroy_window_x, data);
-// 		// mlx_clear_window(data->mlx_data->mlx, data->mlx_data->mlx_win);
-// 	// draw_map(data);

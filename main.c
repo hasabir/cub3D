@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kadjane <kadjane@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: hasabir <hasabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:31:28 by kadjane           #+#    #+#             */
-/*   Updated: 2023/03/18 13:04:32 by kadjane          ###   ########.fr       */
+/*   Updated: 2023/03/25 21:46:58 by hasabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,3 +89,46 @@ int	main(int ac, char **av)
 		ft_free(data->tab_identifier);
 	}
 }
+
+// #include "mlx.h"
+
+// // Define the size of the key state array
+// #define NUM_KEYS 256
+
+// // Define a global array to keep track of the state of each key
+// int key_state[NUM_KEYS];
+
+// // Define a callback function for handling key events
+// int key_callback(int keycode, void *param)
+// {
+//     // Set the state of the key to "pressed"
+//     key_state[keycode] = 1;
+    
+//     return (0);
+// }
+
+// // Define a callback function for handling key release events
+// int key_release_callback(int keycode, void *param)
+// {
+//     // Set the state of the key to "released"
+//     key_state[keycode] = 0;
+    
+//     return (0);
+// }
+
+// // Main function
+// int main()
+// {
+//     // Initialize MLX
+//     void *mlx = mlx_init();
+//     void *win = mlx_new_window(mlx, 640, 480, "Multi-key handling");
+    
+//     // Set the key event callbacks
+//     mlx_hook(win, 2, 1, key_callback, NULL);
+//     mlx_hook(win, 3, 2, key_release_callback, NULL);
+    
+//     // Enter the MLX event loop
+//     mlx_loop(mlx);
+    
+//     return (0);
+// }

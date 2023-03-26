@@ -6,7 +6,7 @@
 /*   By: hasabir <hasabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:31:57 by kadjane           #+#    #+#             */
-/*   Updated: 2023/03/18 13:16:12 by hasabir          ###   ########.fr       */
+/*   Updated: 2023/03/26 15:01:45 by hasabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_player
 {
 	long double		player_x;
 	long double		player_y;
-	float			angle;
+	long double		angle;
 	char			direction;
 	int				type;
 	int				speed;
@@ -66,21 +66,22 @@ typedef struct s_mlx
 	void	*mlx_win;
 	int		size_x;
 	int		size_y;
+	int		key_state[125];
 	t_img	*img;
 }t_mlx;
 
 typedef struct s_coordinate
 {
-	long double	x1;
-	long double	y1;
-	double		x2;
-	double		y2;
-	int			ex;
-	int			ey;
-	int			dx;
-	int			dy;
-	int			px;
-	int			py;
+	long double		x1;
+	long double		y1;
+	long double		x2;
+	long double		y2;
+	int				ex;
+	int				ey;
+	int				dx;
+	int				dy;
+	int				px;
+	int				py;
 }	t_coordinate;
 
 typedef struct s_data
