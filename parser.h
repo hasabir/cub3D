@@ -6,7 +6,7 @@
 /*   By: hasabir <hasabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:31:57 by kadjane           #+#    #+#             */
-/*   Updated: 2023/03/26 15:01:45 by hasabir          ###   ########.fr       */
+/*   Updated: 2023/03/27 07:34:06 by hasabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct s_data
 	char			*init_map;
 	char			**textures;
 	char			**map;
+	double			factor;
 	t_mlx			*mlx_data;
 	t_player		player;
 	t_coordinate	coordinate;

@@ -6,7 +6,7 @@
 /*   By: hasabir <hasabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 13:14:10 by hasabir           #+#    #+#             */
-/*   Updated: 2023/03/26 07:50:04 by hasabir          ###   ########.fr       */
+/*   Updated: 2023/03/27 06:27:09 by hasabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,61 +15,61 @@
 int	can_move(t_data *data, double player_x, double player_y, int *speed, int direction)
 {
 
-		int limit_y;
-	// // double x;
-	// // double y;
-	int	limit_x;
-	double	expected_collision_x;
-	double	expected_collision_y;
+// 		int limit_y;
+// 	// // double x;
+// 	// // double y;
+// 	int	limit_x;
+// 	double	expected_collision_x;
+// 	double	expected_collision_y;
 
 	
-	(void)speed;
-	if (data->player.angle > M_PI / 4 && data->player.angle < M_PI / 4 + M_PI / 2)
-	{
-		// printf("^\n|\n");
-		expected_collision_x =  player_x + (5 * direction) / tan(data->player.angle);
-		expected_collision_y = player_y - 5;
-		limit_y = (int)((expected_collision_y) / 30) * 30;
-		if (data->map[limit_y / 30][(int)(expected_collision_x / 30)] == '1')
-		{
-			if ((int)((expected_collision_y)) != (limit_y + 30) - data->player.speed)
-			{
-				(*speed)--;
-				return (2);
-			}
-		}
-	}
-	if (data->player.angle < M_PI / 4 && data->player.angle > M_PI / 4 - M_PI / 2)
-	{
-		// printf("->\n");
-		expected_collision_x =  player_x + 5;
-		expected_collision_y = player_y + (5 * direction) * tan(data->player.angle);
-		limit_x = (int)((expected_collision_x) / 30) * 30;
-		if (data->map[(int)(expected_collision_y / 30)][limit_x / 30] == '1')
-		{
-			if ((int)((expected_collision_y)) != (limit_x + 30) - data->player.speed)
-			{
-				(*speed)--;
-				return (2);
-			}
-		}
-	}
-	if (data->player.angle > M_PI +  M_PI / 4 && data->player.angle < M_PI / 4 - M_PI / 2)
-	{
-		// printf("hellooo\n");
-		// expected_collision_x =  player_x + (5 * direction) / tan(data->player.angle);
-		// expected_collision_y = player_y - 5;
-		// limit_y = (int)((expected_collision_y) / 30) * 30;
-		// if (data->map[limit_y / 30][(int)(expected_collision_x / 30)] == '1')
-		// {
-		// 	if ((int)((expected_collision_y)) != (limit_y + 30) - data->player.speed)
-		// 	{
-		// 		(*speed)--;
-		// 		return (2);
-		// 	}
-		// }	
-	}
-	// // if (data->player.angle > M_PI / 4 && data->player.angle < M_PI / 4 + M_PI / 2)
+// 	(void)speed;
+// 	if (data->player.angle > M_PI / 4 && data->player.angle < M_PI / 4 + M_PI / 2)
+// 	{
+// 		// printf("^\n|\n");
+// 		expected_collision_x =  player_x + (5 * direction) / tan(data->player.angle);
+// 		expected_collision_y = player_y - 5;
+// 		limit_y = (int)((expected_collision_y) / 30) * 30;
+// 		if (data->map[limit_y / 30][(int)(expected_collision_x / 30)] == '1')
+// 		{
+// 			if ((int)((expected_collision_y)) != (limit_y + 30) - data->player.speed)
+// 			{
+// 				(*speed)--;
+// 				return (2);
+// 			}
+// 		}
+// 	}
+// 	if (data->player.angle < M_PI / 4 && data->player.angle > M_PI / 4 - M_PI / 2)
+// 	{
+// 		// printf("->\n");
+// 		expected_collision_x =  player_x + 5;
+// 		expected_collision_y = player_y + (5 * direction) * tan(data->player.angle);
+// 		limit_x = (int)((expected_collision_x) / 30) * 30;
+// 		if (data->map[(int)(expected_collision_y / 30)][limit_x / 30] == '1')
+// 		{
+// 			if ((int)((expected_collision_y)) != (limit_x + 30) - data->player.speed)
+// 			{
+// 				(*speed)--;
+// 				return (2);
+// 			}
+// 		}
+// 	}
+// 	if (data->player.angle > M_PI +  M_PI / 4 && data->player.angle < M_PI / 4 - M_PI / 2)
+// 	{
+// 		// printf("hellooo\n");
+// 		// expected_collision_x =  player_x + (5 * direction) / tan(data->player.angle);
+// 		// expected_collision_y = player_y - 5;
+// 		// limit_y = (int)((expected_collision_y) / 30) * 30;
+// 		// if (data->map[limit_y / 30][(int)(expected_collision_x / 30)] == '1')
+// 		// {
+// 		// 	if ((int)((expected_collision_y)) != (limit_y + 30) - data->player.speed)
+// 		// 	{
+// 		// 		(*speed)--;
+// 		// 		return (2);
+// 		// 	}
+// 		// }	
+// 	}
+// 	// // if (data->player.angle > M_PI / 4 && data->player.angle < M_PI / 4 + M_PI / 2)
 	// // {
 	// // 	expected_collision_x =  player_x + (5 * direction) / tan(data->player.angle);
 	// // 	expected_collision_y = player_y - 5;
@@ -126,6 +126,8 @@ int	can_move(t_data *data, double player_x, double player_y, int *speed, int dir
 	// 	printf ("------------------>\n");
 	// 	return (0);
 	// }
+	(void)speed;
+	(void)direction;
 	if (data->map[(int)(player_y / 30)][(int)(player_x / 30)] == '1')
 		return (0);
 	return (1);
