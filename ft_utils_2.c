@@ -6,11 +6,11 @@
 /*   By: kadjane <kadjane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:48:46 by kadjane           #+#    #+#             */
-/*   Updated: 2023/03/18 08:48:11 by kadjane          ###   ########.fr       */
+/*   Updated: 2023/04/11 07:17:47 by kadjane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "cub.h"
 
 int	ft_strlen(char *str)
 {
@@ -46,6 +46,7 @@ char	*ft_strjoin(char *line, char *buff)
 	if (!(*line))
 	{
 		free(line);
+		line = NULL;
 		return (ft_strdup(buff));
 	}
 	stock = malloc(ft_strlen(line) + ft_strlen(buff) + 1);
@@ -69,7 +70,7 @@ int	is_whitespace(char c)
 	return (0);
 }
 
-void	check_whitespace(t_data *data, int *other_whitespace, char **tmp)
+void	check_whitespace(t_data *data, char **tmp)
 {
 	*tmp = (*data->line);
 	if (data->line && *(data->line) && is_whitespace(**(data->line)))
@@ -77,10 +78,13 @@ void	check_whitespace(t_data *data, int *other_whitespace, char **tmp)
 		while (is_whitespace(**tmp))
 		{
 			if (**tmp != ' ')
-				other_whitespace++;
+				data->other_whitespace++;
 			(*tmp)++;
 		}
-		if (*(*tmp)++ == '\n')
-			other_whitespace = 0;
+		if (*(*tmp) == '\n')
+		{
+			data->other_whitespace = 0;
+			(*tmp)++;
+		}
 	}
 }

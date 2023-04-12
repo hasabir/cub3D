@@ -6,11 +6,11 @@
 /*   By: hasabir <hasabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 14:41:39 by hasabir           #+#    #+#             */
-/*   Updated: 2023/03/18 12:27:03 by hasabir          ###   ########.fr       */
+/*   Updated: 2023/04/08 11:18:51 by hasabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "cub.h"
 
 int	get_size_x(char **map)
 {
@@ -65,6 +65,6 @@ void	get_player_position(t_data *data)
 		if (data->player.direction)
 			break ;
 	}
-	data->player.player_y = 30 * y + 10;
-	data->player.player_x = 30 * x + 10;
+	data->player.player_y = 50 * y + 25;
+	data->player.player_x = 50 * x + 25;
 }

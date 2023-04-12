@@ -6,11 +6,11 @@
 /*   By: kadjane <kadjane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 19:23:12 by kadjane           #+#    #+#             */
-/*   Updated: 2023/03/18 12:08:21 by kadjane          ###   ########.fr       */
+/*   Updated: 2023/04/08 12:17:35 by kadjane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "cub.h"
 
 int	len_tab(char **tab_identifier)
 {
@@ -59,7 +59,7 @@ char	**check_dup(char **tab_identifier, char *identifier)
 		while (tab_identifier[++i])
 		{
 			if (!ft_strcmp(tab_identifier[i], identifier))
-				ft_error("duplicate texture\n");
+				ft_error("ERROR\n");
 		}
 		if (!tab_identifier[i])
 			tab_identifier = add_identifier(tab_identifier, identifier);
@@ -67,19 +67,20 @@ char	**check_dup(char **tab_identifier, char *identifier)
 	return (tab_identifier);
 }
 
-void	check_range_rgb(char **tab_rgb)
+void	check_nbr_rgb(char *rgb)
 {
 	int	i;
 
-	i = -1;
-	while (tab_rgb[++i])
-	{
-		if (ft_atoi(tab_rgb[i]) < 0 || ft_atoi(tab_rgb[i]) > 255)
-			ft_error("rang not correct\n");
-	}
+	i = 0;
+	while (rgb && rgb[i] && !is_whitespace(rgb[i]))
+		i++;
+	while (rgb && rgb[i] && is_whitespace(rgb[i]))
+		i++;
+	if (rgb && rgb[i] && rgb[i] != '\n')
+		ft_error("ERROR\n");
 }
 
-void	check_ceiling_floor(char *line)
+void	check_ceiling_floor(char **line, t_data *data)
 {
 	char	**tab_rgb;
 	int		i;
@@ -87,15 +88,22 @@ void	check_ceiling_floor(char *line)
 
 	i = -1;
 	j = 0;
-	while (line[++i])
+	while (line[1][++i])
 	{
-		if (line[i] == ',')
+		if (line[1][i] == ',')
 			j++;
 	}
-	tab_rgb = ft_split(line, ',');
+	check_nbr_rgb(line[1]);
+	tab_rgb = ft_split(line[1], ',');
 	if (len_tab(tab_rgb) != 3 || j != 2)
-		ft_error("number of rgb not correct\n");
+		ft_error("ERROR\n");
 	else
 		check_range_rgb(tab_rgb);
-	ft_free(tab_rgb);
+	i = -1;
+	while (is_whitespace(line[0][++i]))
+		;
+	if (line[0][i] == 'F')
+		data->color->rgb_floor = tab_rgb;
+	else
+		data->color->rgb_ceiling = tab_rgb;
 }

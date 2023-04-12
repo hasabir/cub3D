@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kadjane <kadjane@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: hasabir <hasabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:43:41 by kadjane           #+#    #+#             */
-/*   Updated: 2023/03/18 09:37:48 by kadjane          ###   ########.fr       */
+/*   Updated: 2023/04/08 09:57:34 by hasabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "cub.h"
 
 int	ft_search(char *line)
 {
@@ -82,7 +82,7 @@ char	*ft_get_line(char *line, char **save, int n)
 
 char	*get_next_line(int fd)
 {
-	char		*buff;
+	char		buff[2];
 	char		*line;
 	static char	*save[OPEN_MAX];
 	int			n;
@@ -94,9 +94,6 @@ char	*get_next_line(int fd)
 	line = ft_strdup(save[fd]);
 	free(save[fd]);
 	save[fd] = NULL;
-	buff = malloc(2);
-	if (!buff)
-		return (NULL);
 	n = 1;
 	while (n && ft_search(line) == 0)
 	{
@@ -104,6 +101,5 @@ char	*get_next_line(int fd)
 		*(buff + n) = '\0';
 		line = ft_strjoin(line, buff);
 	}
-	free(buff);
 	return (ft_get_line(line, &save[fd], n));
 }

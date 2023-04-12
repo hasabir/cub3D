@@ -6,16 +6,16 @@
 /*   By: kadjane <kadjane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 18:18:52 by kadjane           #+#    #+#             */
-/*   Updated: 2023/03/17 17:48:14 by kadjane          ###   ########.fr       */
+/*   Updated: 2023/04/08 11:03:16 by kadjane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "cub.h"
 
 int	ft_atoi(const char	*str)
 {
-	unsigned int	cmp;
-	int				n;
+	long	cmp;
+	int		n;
 
 	cmp = 0;
 	n = 1;
@@ -24,21 +24,20 @@ int	ft_atoi(const char	*str)
 		while ((*str >= 9 && *str <= 13) || *str == ' ')
 			str++;
 		if (*str == '+' || *str == '-')
-		{
-			if (*str++ == '-')
-				n = -1;
-		}
+			ft_error("ERROR\n");
 		while (*str >= '0' && *str <= '9')
 		{
 			cmp = (cmp * 10) + (*str++ - '0');
 			if (n > 0 && cmp > 2147483647)
 				return (-1);
 			if (n < 0 && cmp > 2147483648)
-				return (0);
+				return (-1);
 		}
-		return (n * cmp);
+		if (*str && (*str < '0' || *str > '9') && *str != '\n'
+			&& !is_whitespace(*str))
+			ft_error("ERROR\n");
 	}
-	return (0);
+	return (n * cmp);
 }
 
 int	ft_strcmp(char *s1, char *s2)
@@ -64,7 +63,7 @@ int	ft_isum(int c)
 		return (0);
 }
 
-void	remove_space_in_the_end(char **line)
+void	remove_space_in_the_end(char **line, int flag)
 {
 	int		i;
 	int		j;
@@ -75,11 +74,15 @@ void	remove_space_in_the_end(char **line)
 	i = 0;
 	j = 0;
 	tmp = *line;
-	while (tmp && tmp[ft_strlen(tmp) - (++i)] == ' ')
-		j++;
+	if (!flag)
+		while (tmp && is_whitespace(tmp[ft_strlen(tmp) - (++i)]))
+			j++;
+	else
+		while (tmp && tmp[ft_strlen(tmp) - (++i)] == ' ')
+			j++;
 	i = 0;
-	line_without_space = malloc(ft_strlen(tmp) - j + 1);
 	len = (ft_strlen(tmp) - j);
+	line_without_space = malloc(len + 1);
 	while (tmp && *tmp && i < len)
 		line_without_space[i++] = *tmp++;
 	line_without_space[i] = '\0';
@@ -89,7 +92,6 @@ void	remove_space_in_the_end(char **line)
 
 void	ft_error(char *error)
 {
-	write (1, "ERROR :", 7);
-	write (1, error, ft_strlen(error));
+	write (2, error, ft_strlen(error));
 	exit(1);
 }
